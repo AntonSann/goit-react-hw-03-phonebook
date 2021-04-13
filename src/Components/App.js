@@ -16,10 +16,12 @@ class App extends Component {
   }
 
 formSubmitHandler = (data) =>{
+ 
   const normalizedName = data.name.toLowerCase();
   const sameName = this.state.contacts
   .map((contact) => contact.name.toLowerCase())
   .includes(normalizedName);
+
 
 if (sameName) {
   alert(`${data.name} is already in contacts`);
@@ -53,13 +55,14 @@ this.setState({filter: event.currentTarget.value});
 componentDidMount(){
   const contacts = localStorage.getItem('contacts');
   const parsedContacts = JSON.parse(contacts);
+  if(parsedContacts){
   this.setState({contacts: parsedContacts});
+}
 }
 
   render (){
 
     const normalizedFilter = this.state.filter.toLowerCase();
-
     const visibleContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
       );
