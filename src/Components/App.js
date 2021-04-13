@@ -12,7 +12,7 @@ class App extends Component {
     {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
     {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'}],
-    filter: ''
+    filter: ' '
   }
 
 formSubmitHandler = (data) =>{
@@ -44,7 +44,7 @@ changeFilter = (event) =>{
 this.setState({filter: event.currentTarget.value});
 }
 
-componentDidUpdate(prevState){
+ componentDidUpdate(prevState){
   if(this.state.contacts !== prevState.contacts){
     localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
   }
@@ -58,14 +58,11 @@ componentDidMount(){
 
   render (){
 
-    let visibleContacts;
-if(this.state.contacts !== null){
-  const normalizedFilter = this.state.filter.toLowerCase();
-  visibleContacts = this.state.contacts.filter(contact =>
+    const normalizedFilter = this.state.filter.toLowerCase();
+
+    const visibleContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
       );
-    }
-    
 
 return (
 <div>
